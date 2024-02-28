@@ -1,0 +1,56 @@
+
+
+// Create a collection named "football"
+db.createCollection("football_teams");
+
+Show collections
+
+// insert sample data
+db.football_teams.insert({ _id: 1, team_name: "Manchester United", country: "England", founded: 1878 });
+db.football_teams.insert({ _id: 2, team_name: "Barcelona", country: "Spain", founded: 1899 });
+db.football_teams.insert({ _id: 3, team_name: "Bayern Munich", country: "Germany", founded: 1900 });
+
+
+// create collection "matches"
+db.createCollection("matches");
+
+db.matches.insert({ home_team: 1, away_team: 2, date: ISODate("2023-01-01"), result: "2-1" });
+db.matches.insert({ home_team: 2, away_team: 2, date: ISODate("2023-02-01"), result: "0-2" });
+db.matches.insert({ home_team: 3, away_team: 3, date: ISODate("2023-03-01"), result: "3-3" });
+
+
+// Query to find all football teams
+db.football_teams.find();
+
+// Update a match result
+db.matches.update({ home_team: 1, away_team: 2 }, { $set: { result: "3-2" } });
+
+
+//query to find matches where Barcelona played 
+db.matches.aggregate([
+  {
+    $match: {
+      $or: [{ home_team: 2 }, { away_team: 2 }]
+    }
+  },
+  {
+    $lookup: {
+      from: "football_teams",
+      localField: "home_team",
+      foreignField: "_id",
+      as: "home_team_details"
+    }
+  },
+  {
+    $lookup: {
+      from: "football_teams",
+      localField: "away_team",
+      foreignField: "_id",
+      as: "away_team_details"
+    }
+  }
+]);
+
+
+// Query to find all matches 
+db.matches.find();

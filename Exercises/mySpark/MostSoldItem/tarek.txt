@@ -1,0 +1,10 @@
+Nike 100 50$ 4.0 T-shirt
+Nike 150 60$ 4.0 Pants
+Addidas 150 60$ 3.0 Shoes
+Addidas 120 70$ 2.0 Pants
+Puma 120 60$ 4.0 Shoes
+Puma 100 50$ 3.0 T-shirt
+C&A 100 45$ 2.0 Shoes
+C&A 120 40$ 3.0 Pants
+H&M 50 50$ 3.0 Shoes
+H&M 40 60$ 2.0 T-shirt

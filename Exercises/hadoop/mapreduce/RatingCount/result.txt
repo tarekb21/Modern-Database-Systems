@@ -1,0 +1,5 @@
+Addidas	3.0
+C&A	2.0
+H&M	2.0
+Nike	4.0
+Puma	4.0

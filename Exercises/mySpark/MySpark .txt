@@ -1,0 +1,35 @@
+
+
+
+cd ~
+mkdir -p mySpark/MostSoldItem
+cd mySpark/MostSoldItem
+
+
+
+//read the input file using Scala API and create RDD
+val data = sc.textFile("tarek.txt")
+
+val parsedData = data.map(line => {
+  val fields = line.split(" ")
+  val brand = fields(0)
+  val soldCount = fields(1).toInt
+  val price = fields(2).replaceAll("\\$", "").toDouble  // Remove the dollar symbol
+  val rating = fields(3).toDouble
+  val category = fields(4)
+  (category, (brand, soldCount, price, rating))
+})
+
+//find the most sold item in each category
+val mostSoldItem = parsedData.reduceByKey((a, b) => if (a._2 > b._2) a else b)
+
+//save the result to a text file
+mostSoldItem.saveAsTextFile("mostSoldItemOutput")
+
+//merge the result (if small enough)
+val merge_result = mostSoldItem.collect()
+
+//quit and check the result
+:quit
+cat mostSoldItemOutput/part-00000
+cat mostSoldItemOutput/part-00001
