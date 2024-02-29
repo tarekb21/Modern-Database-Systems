@@ -1,4 +1,4 @@
-Certainly! Let's include a section on Column Databases in the course highlights:
+
 
 ## Modern Database Systems Course
 
